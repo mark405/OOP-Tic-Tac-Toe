@@ -20,8 +20,8 @@ package mark.tictactoe;
 /**
  * @author mark
  */
-public class Launcher {
-    public static void main(String[] args) {
+public final class Launcher {
+    public static void main(final String[] args) {
 
     }
 }
