@@ -15,12 +15,10 @@
  *
  */
 
-package mark.tictactoe;
+package mark.tictactoe.model;
 
 /**
  * @author mark
  */
-public class ComputerMove {
-    public void make(GameTable gameTable) {
-    }
+public class GameTable {
 }

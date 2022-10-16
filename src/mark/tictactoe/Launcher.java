@@ -17,6 +17,8 @@
 
 package mark.tictactoe;
 
+import mark.tictactoe.component.*;
+
 /**
  * @author mark
  */

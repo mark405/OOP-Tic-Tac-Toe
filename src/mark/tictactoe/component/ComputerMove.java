@@ -15,10 +15,14 @@
  *
  */
 
-package mark.tictactoe;
+package mark.tictactoe.component;
+
+import mark.tictactoe.model.GameTable;
 
 /**
  * @author mark
  */
-public class GameTable {
+public class ComputerMove {
+    public void make(GameTable gameTable) {
+    }
 }

@@ -15,15 +15,14 @@
  *
  */
 
-package mark.tictactoe;
+package mark.tictactoe.component;
+
+import mark.tictactoe.model.GameTable;
 
 /**
  * @author mark
  */
-public class DataPrinter {
-    public void printMappingTable() {
-    }
-
-    public void printGameTable(GameTable gameTable) {
+public class UserMove {
+    public void make(GameTable gameTable) {
     }
 }

@@ -15,13 +15,19 @@
  *
  */
 
-package mark.tictactoe;
+package mark.tictactoe.component;
+
+import mark.tictactoe.model.GameTable;
 
 /**
  * @author mark
  */
-public class DrawVerifier {
-    public boolean isDraw(GameTable gameTable) {
+public class WinnerVerifier {
+    public boolean isUserWin(GameTable gameTable) {
+        return false;
+    }
+
+    public boolean isComputerWin(GameTable gameTable) {
         return false;
     }
 }

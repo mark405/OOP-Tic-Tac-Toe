@@ -15,12 +15,15 @@
  *
  */
 
-package mark.tictactoe;
+package mark.tictactoe.component;
+
+import mark.tictactoe.model.GameTable;
 
 /**
  * @author mark
  */
-public class UserMove {
-    public void make(GameTable gameTable) {
+public class DrawVerifier {
+    public boolean isDraw(GameTable gameTable) {
+        return false;
     }
 }
