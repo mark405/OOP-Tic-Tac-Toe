@@ -38,7 +38,7 @@ public class GameTable {
         return table[cell.getRow()][cell.getCol()];
     }
 
-    public void srtSign(final Cell cell, final char sign) {
+    public void setSign(final Cell cell, final char sign) {
         table[cell.getRow()][cell.getCol()] = sign;
     }
 

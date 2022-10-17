@@ -17,12 +17,31 @@
 
 package mark.tictactoe.component;
 
+import mark.tictactoe.model.Cell;
 import mark.tictactoe.model.GameTable;
+
+import java.util.Random;
 
 /**
  * @author mark
  */
 public class ComputerMove {
-    public void make(GameTable gameTable) {
+    public void make(final GameTable gameTable) {
+        while(true) {
+
+            final Random random = new Random();
+
+            final var row = random.nextInt(3);
+            final var col = random.nextInt(3);
+
+            final Cell randomCell = new Cell(row, col);
+
+            if (gameTable.isEmpty(randomCell)) {
+                gameTable.setSign(randomCell, '0');
+                return;
+            }
+
+        }
+
     }
 }
