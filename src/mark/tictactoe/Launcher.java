@@ -30,7 +30,7 @@ public final class Launcher {
                 new ComputerMove(),
                 new UserMove(),
                 new WinnerVerifier(),
-                new DrawVerifier()
+                new SellVerifier()
         );
 
         game.play();
