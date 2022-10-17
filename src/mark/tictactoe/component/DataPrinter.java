@@ -17,6 +17,7 @@
 
 package mark.tictactoe.component;
 
+import mark.tictactoe.model.Cell;
 import mark.tictactoe.model.GameTable;
 
 /**
@@ -24,8 +25,27 @@ import mark.tictactoe.model.GameTable;
  */
 public class DataPrinter {
     public void printMappingTable() {
+
+        System.out.println("-------------");
+        System.out.println("| 7 | 8 | 9 |");
+        System.out.println("-------------");
+        System.out.println("| 4 | 5 | 6 |");
+        System.out.println("-------------");
+        System.out.println("| 1 | 2 | 3 |");
+        System.out.println("-------------");
+
     }
 
     public void printGameTable(GameTable gameTable) {
+
+        for (int i = 0; i < 3; i++) {
+            System.out.println("-------------");
+            System.out.println("| " +
+                    gameTable.getSign(new Cell(i, 0)) + " | " +
+                    gameTable.getSign(new Cell(i, 1)) + " | " +
+                    gameTable.getSign(new Cell(i, 2)) + " | ");
+        }
+
+        System.out.println("-------------");
     }
 }
