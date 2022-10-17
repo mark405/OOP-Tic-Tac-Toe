@@ -17,17 +17,71 @@
 
 package mark.tictactoe.component;
 
+import mark.tictactoe.model.Cell;
 import mark.tictactoe.model.GameTable;
 
 /**
  * @author mark
  */
 public class WinnerVerifier {
-    public boolean isUserWin(GameTable gameTable) {
+
+    private boolean isWin(final GameTable gameTable, final char cell) {
+
+        return isWinnerByRows(gameTable, cell) ||
+                isWinnerByColumns(gameTable, cell) ||
+                isWinnerByMainDiagonale(gameTable, cell) ||
+                isWinnerBySecondaryDiagonale(gameTable, cell);
+    }
+
+    private boolean isWinnerByMainDiagonale(GameTable gameTable, char cell) {
+        if (gameTable.getSign(new Cell(0, 0)) == cell &&
+                gameTable.getSign(new Cell(1, 1)) == cell &&
+                gameTable.getSign(new Cell(2, 2)) == cell) {
+            return true;
+        }
+
+
         return false;
     }
 
-    public boolean isComputerWin(GameTable gameTable) {
+    private boolean isWinnerBySecondaryDiagonale(GameTable gameTable, char cell) {
+        if (gameTable.getSign(new Cell(0, 2)) == cell &&
+                gameTable.getSign(new Cell(1, 1)) == cell &&
+                gameTable.getSign(new Cell(2, 0)) == cell) {
+            return true;
+        }
         return false;
+    }
+
+    private boolean isWinnerByRows(GameTable gameTable, char cell) {
+        for (int i = 0; i < 3; i++) {
+            if (gameTable.getSign(new Cell(i, 0)) == cell &&
+                    gameTable.getSign(new Cell(i, 1)) == cell &&
+                    gameTable.getSign(new Cell(i, 2)) == cell) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isWinnerByColumns(GameTable gameTable, char cell) {
+        for (int i = 0; i < 3; i++) {
+            if (gameTable.getSign(new Cell(0, i)) == cell &&
+                    gameTable.getSign(new Cell(1, i)) == cell &&
+                    gameTable.getSign(new Cell(2, i)) == cell) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isUserWin(final GameTable gameTable) {
+
+        return isWin(gameTable, 'X');
+    }
+
+    public boolean isComputerWin(GameTable gameTable) {
+
+        return isWin(gameTable, '0');
     }
 }
