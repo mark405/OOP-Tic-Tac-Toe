@@ -15,27 +15,35 @@
  *
  */
 
-package mark.tictactoe;
+package mark.tictactoe.component;
 
-import mark.tictactoe.component.*;
+import mark.tictactoe.model.Cell;
 
 /**
  * @author mark
  */
-public final class Launcher {
-    public static void main(final String[] args) {
+public class CellNumberConverter {
 
-        final CellNumberConverter cellNumberConverter = new CellNumberConverter();
+    private final char[][] tableOfNumbers = {
+            {'7', '8', '9'},
+            {'4', '5', '6'},
+            {'1', '2', '3'},
+    };
 
-        final Game game = new Game(
-                new DataPrinter(cellNumberConverter),
-                new ComputerMove(),
-                new UserMove(cellNumberConverter),
-                new WinnerVerifier(),
-                new SellVerifier()
-        );
+    public Cell toCell(final char number) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (tableOfNumbers[i][j] == number) {
+                    return new Cell(i, j);
+                }
+            }
+        }
 
-        game.play();
-
+        return null;
     }
+
+    public char toNumber(final Cell cell) {
+        return tableOfNumbers[cell.getRow()][cell.getCol()];
+    }
+
 }

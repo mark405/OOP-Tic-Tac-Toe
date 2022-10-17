@@ -27,11 +27,11 @@ import java.util.Scanner;
  */
 public class UserMove {
 
-    private final char[][] tableOfNumbers = {
-            {'7', '8', '9'},
-            {'4', '5', '6'},
-            {'1', '2', '3'},
-    };
+    private final CellNumberConverter cellNumberConverter;
+
+    public UserMove(CellNumberConverter cellNumberConverter) {
+        this.cellNumberConverter = cellNumberConverter;
+    }
 
     public void make(final GameTable gameTable) {
 
@@ -57,14 +57,7 @@ public class UserMove {
             if (signOfUser.length() == 1) {
                 final char ch = signOfUser.charAt(0);
                 if (ch >= '1' && ch <= '9') {
-                    for (int i = 0; i < 3; i++) {
-                        for (int j = 0; j < 3; j++) {
-                            if (tableOfNumbers[i][j] == ch) {
-                                return new Cell(i, j);
-                            }
-                        }
-
-                    }
+                    return cellNumberConverter.toCell(ch);
                 }
             }
 

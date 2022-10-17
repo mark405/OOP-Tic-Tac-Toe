@@ -24,14 +24,23 @@ import mark.tictactoe.model.GameTable;
  * @author mark
  */
 public class DataPrinter {
+
+    private final CellNumberConverter cellNumberConverter;
+
+    public DataPrinter(CellNumberConverter cellNumberConverter) {
+        this.cellNumberConverter = cellNumberConverter;
+    }
+
     public void printMappingTable() {
 
-        System.out.println("-------------");
-        System.out.println("| 7 | 8 | 9 |");
-        System.out.println("-------------");
-        System.out.println("| 4 | 5 | 6 |");
-        System.out.println("-------------");
-        System.out.println("| 1 | 2 | 3 |");
+        for (int i = 0; i < 3; i++) {
+            System.out.println("-------------");
+            System.out.println("| " +
+                    cellNumberConverter.toNumber(new Cell(i, 0)) + " | " +
+                    cellNumberConverter.toNumber(new Cell(i, 1)) + " | " +
+                    cellNumberConverter.toNumber(new Cell(i, 2)) + " | ");
+        }
+
         System.out.println("-------------");
 
     }
