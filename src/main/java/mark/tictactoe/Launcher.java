@@ -18,7 +18,6 @@
 package mark.tictactoe;
 
 import mark.tictactoe.component.*;
-import mark.tictactoe.component.keypad.DesktopNumericKeypadCellNumberConverter;
 import mark.tictactoe.component.keypad.TerminalNumericKeypadCellNumberConverter;
 
 /**

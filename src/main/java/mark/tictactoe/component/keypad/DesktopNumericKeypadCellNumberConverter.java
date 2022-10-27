@@ -49,3 +49,4 @@ public class DesktopNumericKeypadCellNumberConverter implements CellNumberConver
         return tableOfNumbers[cell.getRow()][cell.getCol()];
     }
 }
+

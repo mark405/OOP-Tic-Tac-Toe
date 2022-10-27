@@ -50,11 +50,11 @@ public class GameTable {
 
         for (int i = 0; i < table.length; i++) {
             sb.append(Arrays.toString(table[i]));
-            if(i < table.length - 1) {
+            if (i < table.length - 1) {
                 sb.append(';');
             }
         }
-        
+
         sb.append('}');
 
         return sb.toString();

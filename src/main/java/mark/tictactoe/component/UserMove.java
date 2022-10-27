@@ -35,7 +35,7 @@ public class UserMove {
 
     public void make(final GameTable gameTable) {
 
-        while(true) {
+        while (true) {
             final Cell userCell = getUserInput();
 
             if (gameTable.isEmpty(userCell)) {
@@ -48,7 +48,7 @@ public class UserMove {
     }
 
     private Cell getUserInput() {
-        while(true) {
+        while (true) {
 
             System.out.println("Please type number between 1 and 9:");
 

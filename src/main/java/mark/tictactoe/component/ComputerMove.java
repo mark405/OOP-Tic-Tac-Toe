@@ -27,7 +27,7 @@ import java.util.Random;
  */
 public class ComputerMove {
     public void make(final GameTable gameTable) {
-        while(true) {
+        while (true) {
 
             final Random random = new Random();
 
