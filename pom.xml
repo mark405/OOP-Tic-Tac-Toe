@@ -70,6 +70,7 @@
 
         <!-- Maven additional plugins -->
         <maven-assembly-plugin.version>3.4.2</maven-assembly-plugin.version>
+        <maven-antrun-plugin.version>3.0.0</maven-antrun-plugin.version>
     </properties>
 
     <build>
@@ -123,28 +124,79 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-        <plugins>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>${maven-assembly-plugin.version}</version>
-                <configuration>
-                    <descriptors>
-                        <descriptor>src/assembly/distribution-windows.xml</descriptor>
-                        <descriptor>src/assembly/distribution-unix.xml</descriptor>
-                        <descriptor>src/assembly/distribution-windows-with-jre.xml</descriptor>
-                        <descriptor>src/assembly/distribution-linux-with-jre.xml</descriptor>
-                        <descriptor>src/assembly/distribution-macos-with-jre.xml</descriptor>
-                    </descriptors>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>without-jre</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>${maven-assembly-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>without-jre</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <configuration>
+                                    <descriptors>
+                                        <descriptor>src/assembly/distribution-windows.xml</descriptor>
+                                        <descriptor>src/assembly/distribution-unix.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>with-jre</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>${maven-antrun-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <configuration>
+                                    <target>
+                                        <ant antfile="${project.basedir}/build-jre.xml">
+                                            <target name="build-jre"/>
+                                        </ant>
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>${maven-assembly-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>with-jre</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <configuration>
+                                    <descriptors>
+                                        <descriptor>src/assembly/distribution-windows-with-jre.xml</descriptor>
+                                        <descriptor>src/assembly/distribution-linux-with-jre.xml</descriptor>
+                                        <descriptor>src/assembly/distribution-macos-with-jre.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
