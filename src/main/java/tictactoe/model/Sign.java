@@ -15,28 +15,26 @@
  *
  */
 
-package mark.tictactoe;
-
-import mark.tictactoe.component.*;
-import mark.tictactoe.component.keypad.TerminalNumericKeypadCellNumberConverter;
+package tictactoe.model;
 
 /**
  * @author mark
  */
-public final class Launcher {
-    public static void main(final String[] args) {
+public enum Sign {
 
-        final CellNumberConverter cellNumberConverter = new TerminalNumericKeypadCellNumberConverter();
+    X,
 
-        final Game game = new Game(
-                new DataPrinter(cellNumberConverter),
-                new ComputerMove(),
-                new UserMove(cellNumberConverter),
-                new WinnerVerifier(),
-                new SellVerifier()
-        );
+    O,
 
-        game.play();
+    EMPTY;
 
+
+    @Override
+    public String toString() {
+        if (this == EMPTY) {
+            return " ";
+        }
+
+        return name();
     }
 }

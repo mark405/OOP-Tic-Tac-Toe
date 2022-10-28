@@ -15,26 +15,35 @@
  *
  */
 
-package mark.tictactoe.component.keypad;
+package tictactoe.component;
 
-import mark.tictactoe.component.CellNumberConverter;
-import mark.tictactoe.model.Cell;
+import tictactoe.model.Cell;
+import tictactoe.model.GameTable;
+
+import java.util.Random;
+
+import static tictactoe.model.Sign.O;
 
 /**
  * @author mark
  */
-public class TerminalNumericKeypadCellNumberConverter implements CellNumberConverter {
+public class ComputerMove {
+    public void make(final GameTable gameTable) {
+        while (true) {
 
-    @Override
-    public Cell toCell(char number) {
-        final var val = number - '0' - 1;
+            final Random random = new Random();
 
-        return new Cell(val / 3, val % 3);
+            final var row = random.nextInt(3);
+            final var col = random.nextInt(3);
+
+            final Cell randomCell = new Cell(row, col);
+
+            if (gameTable.isEmpty(randomCell)) {
+                gameTable.setSign(randomCell, O);
+                return;
+            }
+
+        }
+
     }
-
-    @Override
-    public char toNumber(Cell cell) {
-        return (char) ('0' + (cell.getRow() * 3 + cell.getCol() + 1));
-    }
-
 }

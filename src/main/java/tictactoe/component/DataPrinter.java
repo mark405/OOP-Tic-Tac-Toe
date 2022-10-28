@@ -15,10 +15,10 @@
  *
  */
 
-package mark.tictactoe.component;
+package tictactoe.component;
 
-import mark.tictactoe.model.Cell;
-import mark.tictactoe.model.GameTable;
+import tictactoe.model.Cell;
+import tictactoe.model.GameTable;
 
 /**
  * @author mark

@@ -15,9 +15,9 @@
  *
  */
 
-package mark.tictactoe.component;
+package tictactoe.component;
 
-import mark.tictactoe.model.GameTable;
+import tictactoe.model.GameTable;
 
 import java.util.Random;
 

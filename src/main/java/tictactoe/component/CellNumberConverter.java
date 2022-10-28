@@ -15,33 +15,17 @@
  *
  */
 
-package mark.tictactoe.component;
+package tictactoe.component;
 
-import mark.tictactoe.model.Cell;
-import mark.tictactoe.model.GameTable;
-
-import java.util.Random;
+import tictactoe.model.Cell;
 
 /**
  * @author mark
  */
-public class ComputerMove {
-    public void make(final GameTable gameTable) {
-        while (true) {
+public interface CellNumberConverter {
 
-            final Random random = new Random();
+    Cell toCell(final char number);
 
-            final var row = random.nextInt(3);
-            final var col = random.nextInt(3);
+    char toNumber(final Cell cell);
 
-            final Cell randomCell = new Cell(row, col);
-
-            if (gameTable.isEmpty(randomCell)) {
-                gameTable.setSign(randomCell, '0');
-                return;
-            }
-
-        }
-
-    }
 }

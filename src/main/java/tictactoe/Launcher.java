@@ -15,17 +15,28 @@
  *
  */
 
-package mark.tictactoe.component;
+package tictactoe;
 
-import mark.tictactoe.model.Cell;
+import tictactoe.component.*;
+import tictactoe.component.keypad.TerminalNumericKeypadCellNumberConverter;
 
 /**
  * @author mark
  */
-public interface CellNumberConverter {
+public final class Launcher {
+    public static void main(final String[] args) {
 
-    Cell toCell(final char number);
+        final CellNumberConverter cellNumberConverter = new TerminalNumericKeypadCellNumberConverter();
 
-    char toNumber(final Cell cell);
+        final Game game = new Game(
+                new DataPrinter(cellNumberConverter),
+                new ComputerMove(),
+                new UserMove(cellNumberConverter),
+                new WinnerVerifier(),
+                new SellVerifier()
+        );
 
+        game.play();
+
+    }
 }

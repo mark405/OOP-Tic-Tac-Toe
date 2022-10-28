@@ -15,25 +15,38 @@
  *
  */
 
-package mark.tictactoe.component;
+package tictactoe.component.keypad;
 
-import mark.tictactoe.model.Cell;
-import mark.tictactoe.model.GameTable;
+import tictactoe.component.CellNumberConverter;
+import tictactoe.model.Cell;
 
 /**
  * @author mark
  */
-public class SellVerifier {
-    public boolean AllSellsFilled(GameTable gameTable) {
+public class DesktopNumericKeypadCellNumberConverter implements CellNumberConverter {
 
+    char[][] tableOfNumbers = {
+            {'7', '8', '9'},
+            {'4', '5', '6'},
+            {'1', '2', '3'},
+    };
+
+    @Override
+    public Cell toCell(char number) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (gameTable.isEmpty(new Cell(i, j))) {
-                    return false;
+                if (tableOfNumbers[i][j] == number) {
+                    return new Cell(i, j);
                 }
             }
         }
 
-        return true;
+        return null;
+    }
+
+    @Override
+    public char toNumber(Cell cell) {
+        return tableOfNumbers[cell.getRow()][cell.getCol()];
     }
 }
+

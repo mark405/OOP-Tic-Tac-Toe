@@ -15,35 +15,25 @@
  *
  */
 
-package mark.tictactoe.model;
+package tictactoe.component;
+
+import tictactoe.model.Cell;
+import tictactoe.model.GameTable;
 
 /**
  * @author mark
  */
-public class Cell {
+public class SellVerifier {
+    public boolean AllSellsFilled(GameTable gameTable) {
 
-    private final int row;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (gameTable.isEmpty(new Cell(i, j))) {
+                    return false;
+                }
+            }
+        }
 
-    private final int col;
-
-    public Cell(final int row, final int col) {
-        this.row = row;
-        this.col = col;
-    }
-
-    public int getRow() {
-        return row;
-    }
-
-    public int getCol() {
-        return col;
-    }
-
-    @Override
-    public String toString() {
-        return "Cell{" +
-                "row=" + row +
-                ", col=" + col +
-                '}';
+        return true;
     }
 }

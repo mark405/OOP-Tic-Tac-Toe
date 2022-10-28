@@ -15,17 +15,21 @@
  *
  */
 
-package mark.tictactoe.component;
+package tictactoe.component;
 
-import mark.tictactoe.model.Cell;
-import mark.tictactoe.model.GameTable;
+import tictactoe.model.Cell;
+import tictactoe.model.GameTable;
+import tictactoe.model.Sign;
+
+import static tictactoe.model.Sign.O;
+import static tictactoe.model.Sign.X;
 
 /**
  * @author mark
  */
 public class WinnerVerifier {
 
-    private boolean isWin(final GameTable gameTable, final char cell) {
+    private boolean isWin(final GameTable gameTable, final Sign cell) {
 
         return isWinnerByRows(gameTable, cell) ||
                 isWinnerByColumns(gameTable, cell) ||
@@ -33,7 +37,7 @@ public class WinnerVerifier {
                 isWinnerBySecondaryDiagonale(gameTable, cell);
     }
 
-    private boolean isWinnerByMainDiagonale(GameTable gameTable, char cell) {
+    private boolean isWinnerByMainDiagonale(GameTable gameTable, Sign cell) {
         if (gameTable.getSign(new Cell(0, 0)) == cell &&
                 gameTable.getSign(new Cell(1, 1)) == cell &&
                 gameTable.getSign(new Cell(2, 2)) == cell) {
@@ -44,7 +48,7 @@ public class WinnerVerifier {
         return false;
     }
 
-    private boolean isWinnerBySecondaryDiagonale(GameTable gameTable, char cell) {
+    private boolean isWinnerBySecondaryDiagonale(GameTable gameTable, Sign cell) {
         if (gameTable.getSign(new Cell(0, 2)) == cell &&
                 gameTable.getSign(new Cell(1, 1)) == cell &&
                 gameTable.getSign(new Cell(2, 0)) == cell) {
@@ -53,7 +57,7 @@ public class WinnerVerifier {
         return false;
     }
 
-    private boolean isWinnerByRows(GameTable gameTable, char cell) {
+    private boolean isWinnerByRows(GameTable gameTable, Sign cell) {
         for (int i = 0; i < 3; i++) {
             if (gameTable.getSign(new Cell(i, 0)) == cell &&
                     gameTable.getSign(new Cell(i, 1)) == cell &&
@@ -64,7 +68,7 @@ public class WinnerVerifier {
         return false;
     }
 
-    private boolean isWinnerByColumns(GameTable gameTable, char cell) {
+    private boolean isWinnerByColumns(GameTable gameTable, Sign cell) {
         for (int i = 0; i < 3; i++) {
             if (gameTable.getSign(new Cell(0, i)) == cell &&
                     gameTable.getSign(new Cell(1, i)) == cell &&
@@ -77,11 +81,11 @@ public class WinnerVerifier {
 
     public boolean isUserWin(final GameTable gameTable) {
 
-        return isWin(gameTable, 'X');
+        return isWin(gameTable, X);
     }
 
     public boolean isComputerWin(GameTable gameTable) {
 
-        return isWin(gameTable, '0');
+        return isWin(gameTable, O);
     }
 }
