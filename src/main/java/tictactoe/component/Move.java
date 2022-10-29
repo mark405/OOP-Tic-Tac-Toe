@@ -17,33 +17,12 @@
 
 package tictactoe.component;
 
-import tictactoe.model.Cell;
 import tictactoe.model.GameTable;
-
-import java.util.Random;
-
-import static tictactoe.model.Sign.O;
 
 /**
  * @author mark
  */
-public class ComputerMove implements Move {
-    public void make(final GameTable gameTable) {
-        while (true) {
+public interface Move {
 
-            final Random random = new Random();
-
-            final var row = random.nextInt(3);
-            final var col = random.nextInt(3);
-
-            final Cell randomCell = new Cell(row, col);
-
-            if (gameTable.isEmpty(randomCell)) {
-                gameTable.setSign(randomCell, O);
-                return;
-            }
-
-        }
-
-    }
+    public void make(final GameTable gameTable);
 }

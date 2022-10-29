@@ -60,30 +60,38 @@ public class Game {
             dataPrinter.printGameTable(gameTable);
         }
 
+        final Move[] moves = {userMove, computerMove};
+
         while (true) {
-            userMove.make(gameTable);
-            dataPrinter.printGameTable(gameTable);
 
-            if (winnerVerifier.isUserWin(gameTable)) {
-                System.out.println("YOU WIN!");
-                break;
+            boolean gameOver = false;
+
+            for (final Move move : moves) {
+                move.make(gameTable);
+                dataPrinter.printGameTable(gameTable);
+
+                if (move instanceof UserMove) {
+                    if (winnerVerifier.isUserWin(gameTable)) {
+                        System.out.println("YOU WIN!");
+                        gameOver = true;
+                        break;
+                    }
+                } else {
+                    if (winnerVerifier.isComputerWin(gameTable)) {
+                        System.out.println("COMPUTER WIN!");
+                        gameOver = true;
+                        break;
+                    }
+                }
+
+                if (sellVerifier.AllSellsFilled(gameTable)) {
+                    System.out.println("SORRY DRAW!");
+                    gameOver = true;
+                    break;
+                }
             }
 
-            if (sellVerifier.AllSellsFilled(gameTable)) {
-                System.out.println("SORRY DRAW!");
-                break;
-            }
-
-            computerMove.make(gameTable);
-            dataPrinter.printGameTable(gameTable);
-
-            if (winnerVerifier.isComputerWin(gameTable)) {
-                System.out.println("COMPUTER WIN!");
-                break;
-            }
-
-            if (sellVerifier.AllSellsFilled(gameTable)) {
-                System.out.println("SORRY DRAW!");
+            if (gameOver) {
                 break;
             }
         }

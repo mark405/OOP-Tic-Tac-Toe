@@ -27,7 +27,7 @@ import static tictactoe.model.Sign.X;
 /**
  * @author mark
  */
-public class UserMove {
+public class UserMove implements Move{
 
     private final CellNumberConverter cellNumberConverter;
 
