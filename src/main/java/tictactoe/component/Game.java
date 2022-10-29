@@ -64,8 +64,6 @@ public class Game {
 
         while (true) {
 
-            boolean gameOver = false;
-
             for (final Move move : moves) {
                 move.make(gameTable);
                 dataPrinter.printGameTable(gameTable);
@@ -73,31 +71,29 @@ public class Game {
                 if (move instanceof UserMove) {
                     if (winnerVerifier.isUserWin(gameTable)) {
                         System.out.println("YOU WIN!");
-                        gameOver = true;
-                        break;
+                        printGameOver();
+                        return;
                     }
                 } else {
                     if (winnerVerifier.isComputerWin(gameTable)) {
                         System.out.println("COMPUTER WIN!");
-                        gameOver = true;
-                        break;
+                        printGameOver();
+                        return;
                     }
                 }
 
                 if (sellVerifier.AllSellsFilled(gameTable)) {
                     System.out.println("SORRY DRAW!");
-                    gameOver = true;
-                    break;
+                    printGameOver();
+                    return;
                 }
-            }
-
-            if (gameOver) {
-                break;
             }
         }
 
-        System.out.println("GAME OVER");
+    }
 
+    private void printGameOver() {
+        System.out.println("GAME OVER");
     }
 
 }
