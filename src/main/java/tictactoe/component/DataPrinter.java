@@ -32,29 +32,26 @@ public class DataPrinter {
     }
 
     public void printMappingTable() {
-
-        for (int i = 0; i < 3; i++) {
-            System.out.println("-------------");
-            System.out.println("| " +
-                    cellNumberConverter.toNumber(new Cell(i, 0)) + " | " +
-                    cellNumberConverter.toNumber(new Cell(i, 1)) + " | " +
-                    cellNumberConverter.toNumber(new Cell(i, 2)) + " | ");
-        }
-
-        System.out.println("-------------");
-
+        print((i, j) -> String.valueOf(cellNumberConverter.toNumber(new Cell(i, j))));
     }
 
     public void printGameTable(GameTable gameTable) {
+        print((i, j) -> String.valueOf(gameTable.getSign(new Cell(i, j))));
+    }
 
+    private void print(final Lambda lambda) {
         for (int i = 0; i < 3; i++) {
             System.out.println("-------------");
-            System.out.println("| " +
-                    gameTable.getSign(new Cell(i, 0)) + " | " +
-                    gameTable.getSign(new Cell(i, 1)) + " | " +
-                    gameTable.getSign(new Cell(i, 2)) + " | ");
+            for (int j = 0; j < 3; j++) {
+                System.out.print("| " + lambda.getValue(i, j) + " ");
+            }
+            System.out.println("|");
         }
-
         System.out.println("-------------");
+    }
+
+    @FunctionalInterface
+    private interface Lambda {
+        String getValue(int i, int j);
     }
 }
