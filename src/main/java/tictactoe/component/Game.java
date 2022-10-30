@@ -18,8 +18,12 @@
 package tictactoe.component;
 
 import tictactoe.model.GameTable;
+import tictactoe.model.Player;
 
 import java.util.Random;
+
+import static tictactoe.model.Sign.O;
+import static tictactoe.model.Sign.X;
 
 /**
  * @author mark
@@ -55,31 +59,24 @@ public class Game {
 
         final GameTable gameTable = new GameTable();
 
-        if (new Random().nextBoolean()) {
-            computerMove.make(gameTable);
+        /*if (new Random().nextBoolean()) {
+            computerMove.make(gameTable, O);
             dataPrinter.printGameTable(gameTable);
         }
+         */
 
-        final Move[] moves = {userMove, computerMove};
+        final Player[] players = {new Player(X, userMove), new Player(O, computerMove)};
 
         while (true) {
 
-            for (final Move move : moves) {
-                move.make(gameTable);
+            for (final Player player : players) {
+                player.makeMove(gameTable);
                 dataPrinter.printGameTable(gameTable);
 
-                if (move instanceof UserMove) {
-                    if (winnerVerifier.isUserWin(gameTable)) {
-                        System.out.println("YOU WIN!");
-                        printGameOver();
-                        return;
-                    }
-                } else {
-                    if (winnerVerifier.isComputerWin(gameTable)) {
-                        System.out.println("COMPUTER WIN!");
-                        printGameOver();
-                        return;
-                    }
+                if (winnerVerifier.isWin(gameTable, player)) {
+                    System.out.println(player + " WIN!");
+                    printGameOver();
+                    return;
                 }
 
                 if (sellVerifier.AllSellsFilled(gameTable)) {

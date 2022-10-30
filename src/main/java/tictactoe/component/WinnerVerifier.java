@@ -19,6 +19,7 @@ package tictactoe.component;
 
 import tictactoe.model.Cell;
 import tictactoe.model.GameTable;
+import tictactoe.model.Player;
 import tictactoe.model.Sign;
 
 import static tictactoe.model.Sign.O;
@@ -29,12 +30,12 @@ import static tictactoe.model.Sign.X;
  */
 public class WinnerVerifier {
 
-    private boolean isWin(final GameTable gameTable, final Sign cell) {
+    public boolean isWin(final GameTable gameTable, final Player player) {
 
-        return isWinnerByRows(gameTable, cell) ||
-                isWinnerByColumns(gameTable, cell) ||
-                isWinnerByMainDiagonale(gameTable, cell) ||
-                isWinnerBySecondaryDiagonale(gameTable, cell);
+        return isWinnerByRows(gameTable, player.getSign()) ||
+                isWinnerByColumns(gameTable, player.getSign()) ||
+                isWinnerByMainDiagonale(gameTable, player.getSign()) ||
+                isWinnerBySecondaryDiagonale(gameTable, player.getSign());
     }
 
     private boolean isWinnerByMainDiagonale(GameTable gameTable, Sign cell) {
@@ -77,15 +78,5 @@ public class WinnerVerifier {
             }
         }
         return false;
-    }
-
-    public boolean isUserWin(final GameTable gameTable) {
-
-        return isWin(gameTable, X);
-    }
-
-    public boolean isComputerWin(GameTable gameTable) {
-
-        return isWin(gameTable, O);
     }
 }

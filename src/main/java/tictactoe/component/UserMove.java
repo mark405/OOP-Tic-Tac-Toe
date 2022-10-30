@@ -19,6 +19,7 @@ package tictactoe.component;
 
 import tictactoe.model.Cell;
 import tictactoe.model.GameTable;
+import tictactoe.model.Sign;
 
 import java.util.Scanner;
 
@@ -35,13 +36,14 @@ public class UserMove implements Move{
         this.cellNumberConverter = cellNumberConverter;
     }
 
-    public void make(final GameTable gameTable) {
+    @Override
+    public void make(final GameTable gameTable, final Sign sign) {
 
         while (true) {
             final Cell userCell = getUserInput();
 
             if (gameTable.isEmpty(userCell)) {
-                gameTable.setSign(userCell, X);
+                gameTable.setSign(userCell, sign);
                 return;
             } else {
                 System.out.println("Can't make a move, because the cell is not free. Try again!");

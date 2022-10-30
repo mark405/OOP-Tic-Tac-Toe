@@ -28,7 +28,6 @@ public enum Sign {
 
     EMPTY;
 
-
     @Override
     public String toString() {
         if (this == EMPTY) {
