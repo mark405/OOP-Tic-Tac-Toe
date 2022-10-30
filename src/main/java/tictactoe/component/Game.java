@@ -22,15 +22,16 @@ import tictactoe.model.Player;
 
 import java.util.Random;
 
-import static tictactoe.model.Sign.O;
-import static tictactoe.model.Sign.X;
-
 /**
  * @author mark
  */
 public class Game {
 
     private final DataPrinter dataPrinter;
+
+    private final Player player1;
+
+    private final Player player2;
 
     private final ComputerMove computerMove;
 
@@ -40,16 +41,24 @@ public class Game {
 
     private final SellVerifier sellVerifier;
 
+    private final boolean canSecondPlayerMakeFirstMove;
+
     public Game(final DataPrinter dataPrinter,
+                final Player player1,
+                final Player player2,
                 final ComputerMove computerMove,
                 final UserMove userMove,
                 final WinnerVerifier winnerVerifier,
-                final SellVerifier sellVerifier) {
+                final SellVerifier sellVerifier,
+                final boolean canSecondPlayerMakeFirstMove) {
         this.dataPrinter = dataPrinter;
+        this.player1 = player1;
+        this.player2 = player2;
         this.computerMove = computerMove;
         this.userMove = userMove;
         this.winnerVerifier = winnerVerifier;
         this.sellVerifier = sellVerifier;
+        this.canSecondPlayerMakeFirstMove = canSecondPlayerMakeFirstMove;
     }
 
     public void play() {
@@ -59,13 +68,12 @@ public class Game {
 
         final GameTable gameTable = new GameTable();
 
-        /*if (new Random().nextBoolean()) {
-            computerMove.make(gameTable, O);
+        if (canSecondPlayerMakeFirstMove && new Random().nextBoolean()) {
+            player2.makeMove(gameTable);
             dataPrinter.printGameTable(gameTable);
         }
-         */
 
-        final Player[] players = {new Player(X, userMove), new Player(O, computerMove)};
+        final Player[] players = {player1, player2};
 
         while (true) {
 

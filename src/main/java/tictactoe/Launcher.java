@@ -18,7 +18,11 @@
 package tictactoe;
 
 import tictactoe.component.*;
-import tictactoe.component.keypad.TerminalNumericKeypadCellNumberConverter;
+import tictactoe.component.keypad.DesktopNumericKeypadCellNumberConverter;
+import tictactoe.model.Player;
+
+import static tictactoe.model.Sign.O;
+import static tictactoe.model.Sign.X;
 
 /**
  * @author mark
@@ -26,15 +30,17 @@ import tictactoe.component.keypad.TerminalNumericKeypadCellNumberConverter;
 public final class Launcher {
     public static void main(final String[] args) {
 
-        final CellNumberConverter cellNumberConverter = new TerminalNumericKeypadCellNumberConverter();
+        final CellNumberConverter cellNumberConverter = new DesktopNumericKeypadCellNumberConverter();
 
         final Game game = new Game(
                 new DataPrinter(cellNumberConverter),
+                new Player(X, new UserMove(cellNumberConverter)),
+                new Player(O, new ComputerMove()),
                 new ComputerMove(),
                 new UserMove(cellNumberConverter),
                 new WinnerVerifier(),
-                new SellVerifier()
-        );
+                new SellVerifier(),
+                false);
 
         game.play();
 
