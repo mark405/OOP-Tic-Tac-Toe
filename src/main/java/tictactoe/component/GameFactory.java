@@ -17,11 +17,12 @@
 
 package tictactoe.component;
 
+import tictactoe.component.console.ConsoleDataPrinter;
+import tictactoe.component.console.ConsoleUserInputReader;
 import tictactoe.component.keypad.DesktopNumericKeypadCellNumberConverter;
 import tictactoe.model.Player;
 import tictactoe.model.PlayerType;
 
-import static tictactoe.model.PlayerType.COMPUTER;
 import static tictactoe.model.PlayerType.USER;
 import static tictactoe.model.Sign.O;
 import static tictactoe.model.Sign.X;
@@ -48,17 +49,19 @@ public class GameFactory {
     public Game create() {
 
         final CellNumberConverter cellNumberConverter = new DesktopNumericKeypadCellNumberConverter();
+        final DataPrinter dataPrinter = new ConsoleDataPrinter(cellNumberConverter);
+        final UserInputReader userInputReader = new ConsoleUserInputReader(cellNumberConverter, dataPrinter);
 
         final Player player1;
         if (playerType1 == USER) {
-            player1 = new Player(X, new UserMove(cellNumberConverter));
+            player1 = new Player(X, new UserMove(userInputReader, dataPrinter));
         } else {
             player1 = new Player(X, new ComputerMove());
         }
 
         final Player player2;
         if (playerType2 == USER) {
-            player2 = new Player(O, new UserMove(cellNumberConverter));
+            player2 = new Player(O, new UserMove(userInputReader, dataPrinter));
         } else {
             player2 = new Player(O, new ComputerMove());
         }
@@ -66,12 +69,11 @@ public class GameFactory {
         final boolean canSecondPlayerMakeFirstMove = playerType1 != playerType2;
 
         return new Game(
-                new DataPrinterImpl(cellNumberConverter),
-                //FIXME
                 player1,
                 player2,
                 new WinnerVerifier(),
                 new SellVerifier(),
-                canSecondPlayerMakeFirstMove);
+                canSecondPlayerMakeFirstMove,
+                dataPrinter);
     }
 }

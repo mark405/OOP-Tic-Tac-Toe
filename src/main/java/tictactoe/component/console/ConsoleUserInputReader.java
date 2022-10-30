@@ -27,19 +27,20 @@ import java.util.Scanner;
 /**
  * @author mark
  */
-public class UserInputReaderImpl implements UserInputReader {
+public class ConsoleUserInputReader implements UserInputReader {
 
     private final CellNumberConverter cellNumberConverter;
 
     DataPrinter dataPrinter;
 
-    public UserInputReaderImpl(final CellNumberConverter cellNumberConverter, final DataPrinter dataPrinter) {
+    public ConsoleUserInputReader(final CellNumberConverter cellNumberConverter, final DataPrinter dataPrinter) {
         this.cellNumberConverter = cellNumberConverter;
         this.dataPrinter = dataPrinter;
     }
 
+
     @Override
-    public Cell getUSerInput() {
+    public Cell getUserInput() {
         while (true) {
 
             dataPrinter.printInfoMessage("Please type number between 1 and 9:");

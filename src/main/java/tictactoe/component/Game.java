@@ -17,6 +17,7 @@
 
 package tictactoe.component;
 
+import tictactoe.component.console.ConsoleDataPrinter;
 import tictactoe.model.GameTable;
 import tictactoe.model.Player;
 
@@ -26,8 +27,6 @@ import java.util.Random;
  * @author mark
  */
 public class Game {
-
-    private final DataPrinterImpl dataPrinterImpl;
 
     private final Player player1;
 
@@ -39,30 +38,32 @@ public class Game {
 
     private final boolean canSecondPlayerMakeFirstMove;
 
-    public Game(final DataPrinterImpl dataPrinterImpl,
-                final Player player1,
+    private final DataPrinter dataPrinter;
+
+    public Game(final Player player1,
                 final Player player2,
                 final WinnerVerifier winnerVerifier,
                 final SellVerifier sellVerifier,
-                final boolean canSecondPlayerMakeFirstMove) {
-        this.dataPrinterImpl = dataPrinterImpl;
+                final boolean canSecondPlayerMakeFirstMove,
+                final DataPrinter dataPrinter) {
         this.player1 = player1;
         this.player2 = player2;
         this.winnerVerifier = winnerVerifier;
         this.sellVerifier = sellVerifier;
         this.canSecondPlayerMakeFirstMove = canSecondPlayerMakeFirstMove;
+        this.dataPrinter = dataPrinter;
     }
 
     public void play() {
 
-        System.out.println("Please use the following mapping table to specify a cell using numbers from 1 to 9:");
-        dataPrinterImpl.printMappingTable();
+        dataPrinter.printInfoMessage("Please use the following mapping table to specify a cell using numbers from 1 to 9:");
+        dataPrinter.printMappingTable();
 
         final GameTable gameTable = new GameTable();
 
         if (canSecondPlayerMakeFirstMove && new Random().nextBoolean()) {
             player2.makeMove(gameTable);
-            dataPrinterImpl.printGameTable(gameTable);
+            dataPrinter.printGameTable(gameTable);
         }
 
         final Player[] players = {player1, player2};
@@ -71,26 +72,22 @@ public class Game {
 
             for (final Player player : players) {
                 player.makeMove(gameTable);
-                dataPrinterImpl.printGameTable(gameTable);
+                dataPrinter.printGameTable(gameTable);
 
                 if (winnerVerifier.isWin(gameTable, player)) {
-                    System.out.println(player + " WIN!");
-                    printGameOver();
+                    dataPrinter.printInfoMessage(player + " WIN!");
+                    dataPrinter.printInfoMessage("GAME OVER");
                     return;
                 }
 
                 if (sellVerifier.AllSellsFilled(gameTable)) {
-                    System.out.println("SORRY DRAW!");
-                    printGameOver();
+                    dataPrinter.printInfoMessage("SORRY DRAW");
+                    dataPrinter.printInfoMessage("GAME OVER");
                     return;
                 }
             }
         }
 
-    }
-
-    private void printGameOver() {
-        System.out.println("GAME OVER");
     }
 
 }

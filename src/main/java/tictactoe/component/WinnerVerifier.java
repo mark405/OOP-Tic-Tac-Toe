@@ -22,9 +22,6 @@ import tictactoe.model.GameTable;
 import tictactoe.model.Player;
 import tictactoe.model.Sign;
 
-import static tictactoe.model.Sign.O;
-import static tictactoe.model.Sign.X;
-
 /**
  * @author mark
  */

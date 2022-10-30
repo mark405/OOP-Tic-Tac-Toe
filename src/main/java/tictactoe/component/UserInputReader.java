@@ -23,5 +23,6 @@ import tictactoe.model.Cell;
  * @author mark
  */
 public interface UserInputReader {
-    Cell getUSerInput();
+
+    Cell getUserInput();
 }
