@@ -17,18 +17,11 @@
 
 package tictactoe.component;
 
-import tictactoe.model.GameTable;
+import tictactoe.model.Cell;
 
 /**
  * @author mark
  */
-public interface DataPrinter {
-
-    void printInfoMessage(final String message);
-
-    void printErrorMessage(final String message);
-
-    void printMappingTable();
-
-    void printGameTable(final GameTable gameTable);
+public interface UserInputReader {
+    Cell getUSerInput();
 }

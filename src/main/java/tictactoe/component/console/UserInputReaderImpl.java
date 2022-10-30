@@ -15,46 +15,34 @@
  *
  */
 
-package tictactoe.component;
+package tictactoe.component.console;
 
+import tictactoe.component.CellNumberConverter;
+import tictactoe.component.DataPrinter;
+import tictactoe.component.UserInputReader;
 import tictactoe.model.Cell;
-import tictactoe.model.GameTable;
-import tictactoe.model.Sign;
 
 import java.util.Scanner;
-
-import static tictactoe.model.Sign.X;
 
 /**
  * @author mark
  */
-public class UserMove implements Move {
+public class UserInputReaderImpl implements UserInputReader {
 
     private final CellNumberConverter cellNumberConverter;
 
-    public UserMove(CellNumberConverter cellNumberConverter) {
+    DataPrinter dataPrinter;
+
+    public UserInputReaderImpl(final CellNumberConverter cellNumberConverter, final DataPrinter dataPrinter) {
         this.cellNumberConverter = cellNumberConverter;
+        this.dataPrinter = dataPrinter;
     }
 
     @Override
-    public void make(final GameTable gameTable, final Sign sign) {
-
-        while (true) {
-            final Cell userCell = getUserInput();
-
-            if (gameTable.isEmpty(userCell)) {
-                gameTable.setSign(userCell, sign);
-                return;
-            } else {
-                System.out.println("Can't make a move, because the cell is not free. Try again!");
-            }
-        }
-    }
-
-    private Cell getUserInput() {
+    public Cell getUSerInput() {
         while (true) {
 
-            System.out.println("Please type number between 1 and 9:");
+            dataPrinter.printInfoMessage("Please type number between 1 and 9:");
 
             final String signOfUser = new Scanner(System.in).nextLine();
 
