@@ -37,44 +37,25 @@ public class GameFactory {
 
     public GameFactory(final String[] args) {
 
-        PlayerType playerType1 = null;
-        PlayerType playerType2 = null;
+        final CommandLineArgumentParser.PlayerTypes playerTypes =
+                new CommandLineArgumentParser(args).parse();
 
-        for (final String arg : args) {
-            if (USER.name().equalsIgnoreCase(arg) || COMPUTER.name().equalsIgnoreCase(arg)) {
-                if (playerType1 == null) {
-                    playerType1 = PlayerType.valueOf(arg.toUpperCase());
-                } else if (playerType2 == null) {
-                    playerType2 = PlayerType.valueOf(arg.toUpperCase());
-                } else {
-                    System.err.println("Unsupported command line argument: '" + arg + "'");
-                }
-            } else {
-                System.err.println("Unsupported command line argument: '" + arg + "'");
-            }
-        }
-
-        if (playerType1 == null) {
-            this.playerType1 = USER;
-            this.playerType2 = COMPUTER;
-        } else if (playerType2 == null) {
-            this.playerType1 = USER;
-            this.playerType2 = playerType1;
-        } else {
-            this.playerType1 = playerType1;
-            this.playerType2 = playerType2;
-        }
+        this.playerType1 = playerTypes.getPlayerType1();
+        this.playerType2 = playerTypes.getPlayerType2();
 
     }
 
     public Game create() {
+
         final CellNumberConverter cellNumberConverter = new DesktopNumericKeypadCellNumberConverter();
+
         final Player player1;
         if (playerType1 == USER) {
             player1 = new Player(X, new UserMove(cellNumberConverter));
         } else {
             player1 = new Player(X, new ComputerMove());
         }
+
         final Player player2;
         if (playerType2 == USER) {
             player2 = new Player(O, new UserMove(cellNumberConverter));
