@@ -15,26 +15,14 @@
  *
  */
 
-package tictactoe;
-
-import tictactoe.component.*;
-import tictactoe.component.keypad.DesktopNumericKeypadCellNumberConverter;
-import tictactoe.model.Player;
-
-import static tictactoe.model.Sign.O;
-import static tictactoe.model.Sign.X;
+package tictactoe.model;
 
 /**
  * @author mark
  */
-public final class Launcher {
-    public static void main(final String[] args) {
+public enum PlayerType {
 
-        final GameFactory gameFactory = new GameFactory(args);
+    USER,
 
-        final Game game = gameFactory.create();
-
-        game.play();
-
-    }
+    COMPUTER
 }

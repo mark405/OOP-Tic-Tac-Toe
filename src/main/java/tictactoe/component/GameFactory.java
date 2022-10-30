@@ -15,11 +15,11 @@
  *
  */
 
-package tictactoe;
+package tictactoe.component;
 
-import tictactoe.component.*;
 import tictactoe.component.keypad.DesktopNumericKeypadCellNumberConverter;
 import tictactoe.model.Player;
+import tictactoe.model.PlayerType;
 
 import static tictactoe.model.Sign.O;
 import static tictactoe.model.Sign.X;
@@ -27,14 +27,28 @@ import static tictactoe.model.Sign.X;
 /**
  * @author mark
  */
-public final class Launcher {
-    public static void main(final String[] args) {
+public class GameFactory {
 
-        final GameFactory gameFactory = new GameFactory(args);
+    private final PlayerType playerType1 = PlayerType.USER;
 
-        final Game game = gameFactory.create();
+    private final PlayerType playerType2 = PlayerType.COMPUTER;
 
-        game.play();
+    public GameFactory(final String[] args) {
+        // TODO
+    }
 
+    public Game create() {
+        final CellNumberConverter cellNumberConverter = new DesktopNumericKeypadCellNumberConverter();
+
+        return new Game(
+                new DataPrinter(cellNumberConverter),
+                //FIXME
+                new Player(X, new UserMove(cellNumberConverter)),
+                new Player(O, new ComputerMove()),
+                new ComputerMove(),
+                new UserMove(cellNumberConverter),
+                new WinnerVerifier(),
+                new SellVerifier(),
+                false);
     }
 }
