@@ -18,17 +18,14 @@
 package tictactoe;
 
 import tictactoe.component.*;
-import tictactoe.component.keypad.DesktopNumericKeypadCellNumberConverter;
-import tictactoe.model.Player;
-
-import static tictactoe.model.Sign.O;
-import static tictactoe.model.Sign.X;
 
 /**
  * @author mark
  */
 public final class Launcher {
     public static void main(final String[] args) {
+
+        System.out.println(args[0] + args[1] + args[2]);
 
         final GameFactory gameFactory = new GameFactory(args);
 

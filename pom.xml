@@ -101,7 +101,7 @@
                     <configuration>
                         <archive>
                             <manifest>
-                                <mainClass>mark.tictactoe.Launcher</mainClass>
+                                <mainClass>tictactoe.Launcher</mainClass>
                             </manifest>
                         </archive>
                     </configuration>

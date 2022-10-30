@@ -21,6 +21,8 @@ import tictactoe.component.keypad.DesktopNumericKeypadCellNumberConverter;
 import tictactoe.model.Player;
 import tictactoe.model.PlayerType;
 
+import static tictactoe.model.PlayerType.COMPUTER;
+import static tictactoe.model.PlayerType.USER;
 import static tictactoe.model.Sign.O;
 import static tictactoe.model.Sign.X;
 
@@ -29,26 +31,66 @@ import static tictactoe.model.Sign.X;
  */
 public class GameFactory {
 
-    private final PlayerType playerType1 = PlayerType.USER;
+    private final PlayerType playerType1;
 
-    private final PlayerType playerType2 = PlayerType.COMPUTER;
+    private final PlayerType playerType2;
 
     public GameFactory(final String[] args) {
-        // TODO
+
+        PlayerType playerType1 = null;
+        PlayerType playerType2 = null;
+
+        for (final String arg : args) {
+            if (USER.name().equalsIgnoreCase(arg) || COMPUTER.name().equalsIgnoreCase(arg)) {
+                if (playerType1 == null) {
+                    playerType1 = PlayerType.valueOf(arg.toUpperCase());
+                } else if (playerType2 == null) {
+                    playerType2 = PlayerType.valueOf(arg.toUpperCase());
+                } else {
+                    System.err.println("Unsupported command line argument: '" + arg + "'");
+                }
+            } else {
+                System.err.println("Unsupported command line argument: '" + arg + "'");
+            }
+        }
+
+        if (playerType1 == null) {
+            this.playerType1 = USER;
+            this.playerType2 = COMPUTER;
+        } else if (playerType2 == null) {
+            this.playerType1 = USER;
+            this.playerType2 = playerType1;
+        } else {
+            this.playerType1 = playerType1;
+            this.playerType2 = playerType2;
+        }
+
     }
 
     public Game create() {
         final CellNumberConverter cellNumberConverter = new DesktopNumericKeypadCellNumberConverter();
+        final Player player1;
+        if (playerType1 == USER) {
+            player1 = new Player(X, new UserMove(cellNumberConverter));
+        } else {
+            player1 = new Player(X, new ComputerMove());
+        }
+        final Player player2;
+        if (playerType2 == USER) {
+            player2 = new Player(O, new UserMove(cellNumberConverter));
+        } else {
+            player2 = new Player(O, new ComputerMove());
+        }
+
+        final boolean canSecondPlayerMakeFirstMove = playerType1 != playerType2;
 
         return new Game(
                 new DataPrinter(cellNumberConverter),
                 //FIXME
-                new Player(X, new UserMove(cellNumberConverter)),
-                new Player(O, new ComputerMove()),
-                new ComputerMove(),
-                new UserMove(cellNumberConverter),
+                player1,
+                player2,
                 new WinnerVerifier(),
                 new SellVerifier(),
-                false);
+                canSecondPlayerMakeFirstMove);
     }
 }

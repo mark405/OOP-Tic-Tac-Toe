@@ -33,10 +33,6 @@ public class Game {
 
     private final Player player2;
 
-    private final ComputerMove computerMove;
-
-    private final UserMove userMove;
-
     private final WinnerVerifier winnerVerifier;
 
     private final SellVerifier sellVerifier;
@@ -46,16 +42,12 @@ public class Game {
     public Game(final DataPrinter dataPrinter,
                 final Player player1,
                 final Player player2,
-                final ComputerMove computerMove,
-                final UserMove userMove,
                 final WinnerVerifier winnerVerifier,
                 final SellVerifier sellVerifier,
                 final boolean canSecondPlayerMakeFirstMove) {
         this.dataPrinter = dataPrinter;
         this.player1 = player1;
         this.player2 = player2;
-        this.computerMove = computerMove;
-        this.userMove = userMove;
         this.winnerVerifier = winnerVerifier;
         this.sellVerifier = sellVerifier;
         this.canSecondPlayerMakeFirstMove = canSecondPlayerMakeFirstMove;
