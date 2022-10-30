@@ -15,35 +15,25 @@
  *
  */
 
-package tictactoe.model;
+package tictactoe.model.game;
 
 /**
  * @author mark
  */
-public class Cell {
+public enum Sign {
 
-    private final int row;
+    X,
 
-    private final int col;
+    O,
 
-    public Cell(final int row, final int col) {
-        this.row = row;
-        this.col = col;
-    }
-
-    public int getRow() {
-        return row;
-    }
-
-    public int getCol() {
-        return col;
-    }
+    EMPTY;
 
     @Override
     public String toString() {
-        return "Cell{" +
-                "row=" + row +
-                ", col=" + col +
-                '}';
+        if (this == EMPTY) {
+            return " ";
+        }
+
+        return name();
     }
 }

@@ -17,10 +17,9 @@
 
 package tictactoe.component.console;
 
-import tictactoe.component.CellNumberConverter;
 import tictactoe.component.DataPrinter;
-import tictactoe.model.Cell;
-import tictactoe.model.GameTable;
+import tictactoe.model.game.Cell;
+import tictactoe.model.game.GameTable;
 
 /**
  * @author mark
@@ -44,13 +43,14 @@ public class ConsoleDataPrinter implements DataPrinter {
     }
 
     @Override
-    public void printMappingTable() {
-        print((i, j) -> String.valueOf(cellNumberConverter.toNumber(new Cell(i, j))));
+    public void printGameTable(final GameTable gameTable) {
+        print((i, j) -> String.valueOf(gameTable.getSign(new Cell(i, j))));
     }
 
     @Override
-    public void printGameTable(final GameTable gameTable) {
-        print((i, j) -> String.valueOf(gameTable.getSign(new Cell(i, j))));
+    public void printInstructions() {
+        printInfoMessage("Use the following mapping table to specify a cell numbers from 1 to 9: ");
+        print((i, j) -> String.valueOf(cellNumberConverter.toNumber(new Cell(i, j))));
     }
 
     private void print(final Lambda lambda) {

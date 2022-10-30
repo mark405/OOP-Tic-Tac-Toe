@@ -17,7 +17,7 @@
 
 package tictactoe.component;
 
-import tictactoe.model.Cell;
+import tictactoe.model.game.Cell;
 
 /**
  * @author mark

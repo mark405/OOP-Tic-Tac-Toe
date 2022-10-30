@@ -17,9 +17,8 @@
 
 package tictactoe.component;
 
-import tictactoe.component.console.ConsoleDataPrinter;
-import tictactoe.model.GameTable;
-import tictactoe.model.Player;
+import tictactoe.model.game.GameTable;
+import tictactoe.model.game.Player;
 
 import java.util.Random;
 
@@ -40,24 +39,27 @@ public class Game {
 
     private final DataPrinter dataPrinter;
 
+    private final GameOverHandler gameOverHandler;
+
     public Game(final Player player1,
                 final Player player2,
                 final WinnerVerifier winnerVerifier,
                 final SellVerifier sellVerifier,
                 final boolean canSecondPlayerMakeFirstMove,
-                final DataPrinter dataPrinter) {
+                final DataPrinter dataPrinter,
+                final GameOverHandler gameOverHandler) {
         this.player1 = player1;
         this.player2 = player2;
         this.winnerVerifier = winnerVerifier;
         this.sellVerifier = sellVerifier;
         this.canSecondPlayerMakeFirstMove = canSecondPlayerMakeFirstMove;
         this.dataPrinter = dataPrinter;
+        this.gameOverHandler = gameOverHandler;
     }
 
     public void play() {
 
-        dataPrinter.printInfoMessage("Please use the following mapping table to specify a cell using numbers from 1 to 9:");
-        dataPrinter.printMappingTable();
+        dataPrinter.printInstructions();
 
         final GameTable gameTable = new GameTable();
 
@@ -76,13 +78,13 @@ public class Game {
 
                 if (winnerVerifier.isWin(gameTable, player)) {
                     dataPrinter.printInfoMessage(player + " WIN!");
-                    dataPrinter.printInfoMessage("GAME OVER");
+                    gameOverHandler.gameOver();
                     return;
                 }
 
                 if (sellVerifier.AllSellsFilled(gameTable)) {
                     dataPrinter.printInfoMessage("SORRY DRAW");
-                    dataPrinter.printInfoMessage("GAME OVER");
+                    gameOverHandler.gameOver();
                     return;
                 }
             }

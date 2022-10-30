@@ -15,34 +15,26 @@
  *
  */
 
-package tictactoe.model;
+package tictactoe.component.console.keypad;
 
-import tictactoe.component.Move;
+import tictactoe.component.console.CellNumberConverter;
+import tictactoe.model.game.Cell;
 
 /**
  * @author mark
  */
-public class Player {
+public class TerminalNumericKeypadCellNumberConverter implements CellNumberConverter {
 
-    private final Sign sign;
+    @Override
+    public Cell toCell(char number) {
+        final var val = number - '0' - 1;
 
-    private final Move move;
-
-    public Player(final Sign sign, final Move move) {
-        this.sign = sign;
-        this.move = move;
-    }
-
-    public Sign getSign() {
-        return sign;
-    }
-
-    public void makeMove(final GameTable gameTable) {
-        move.make(gameTable, sign);
+        return new Cell(val / 3, val % 3);
     }
 
     @Override
-    public String toString() {
-        return "'" + sign + "'";
+    public char toNumber(Cell cell) {
+        return (char) ('0' + (cell.getRow() * 3 + cell.getCol() + 1));
     }
+
 }

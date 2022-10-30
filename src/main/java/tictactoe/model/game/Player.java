@@ -15,25 +15,34 @@
  *
  */
 
-package tictactoe.model;
+package tictactoe.model.game;
+
+import tictactoe.component.Move;
 
 /**
  * @author mark
  */
-public enum Sign {
+public class Player {
 
-    X,
+    private final Sign sign;
 
-    O,
+    private final Move move;
 
-    EMPTY;
+    public Player(final Sign sign, final Move move) {
+        this.sign = sign;
+        this.move = move;
+    }
+
+    public Sign getSign() {
+        return sign;
+    }
+
+    public void makeMove(final GameTable gameTable) {
+        move.make(gameTable, sign);
+    }
 
     @Override
     public String toString() {
-        if (this == EMPTY) {
-            return " ";
-        }
-
-        return name();
+        return "'" + sign + "'";
     }
 }

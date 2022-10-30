@@ -48,12 +48,9 @@ else
   # Fix current dir issue. Read more: http://hints.macworld.com/article.php?story=20041217111834902
   cd "$(dirname "$0")" || exit
   # Run tic-tac-toe game:
-  $JAVA_CMD -jar ${project.build.finalName}.jar
+  $JAVA_CMD -jar ${project.build.finalName}.jar "$@"
   RETURN_CODE=0
 fi
 # ----------------------------------------------------------------------------------------------------------------------
-# Wait for the `enter` key pressed:
-echo "Press enter to continue . . ."
-read -r test
 # ----------------------------------------------------------------------------------------------------------------------
 exit $RETURN_CODE

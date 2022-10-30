@@ -15,20 +15,35 @@
  *
  */
 
-package tictactoe.component;
-
-import tictactoe.model.game.GameTable;
+package tictactoe.model.game;
 
 /**
  * @author mark
  */
-public interface DataPrinter {
+public class Cell {
 
-    void printInfoMessage(final String message);
+    private final int row;
 
-    void printErrorMessage(final String message);
+    private final int col;
 
-    void printGameTable(final GameTable gameTable);
+    public Cell(final int row, final int col) {
+        this.row = row;
+        this.col = col;
+    }
 
-    void printInstructions();
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    @Override
+    public String toString() {
+        return "Cell{" +
+                "row=" + row +
+                ", col=" + col +
+                '}';
+    }
 }

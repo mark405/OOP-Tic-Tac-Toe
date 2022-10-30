@@ -15,17 +15,14 @@
  *
  */
 
-package tictactoe.component;
-
-import tictactoe.model.Cell;
+package tictactoe.model.config;
 
 /**
  * @author mark
  */
-public interface CellNumberConverter {
+public enum UserInterface {
 
-    Cell toCell(final char number);
+    GUI,
 
-    char toNumber(final Cell cell);
-
+    CONSOLE
 }

@@ -15,11 +15,11 @@
  *
  */
 
-package tictactoe.model;
+package tictactoe.model.game;
 
 import java.util.Arrays;
 
-import static tictactoe.model.Sign.EMPTY;
+import static tictactoe.model.game.Sign.EMPTY;
 
 /**
  * @author mark

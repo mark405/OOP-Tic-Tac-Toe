@@ -15,20 +15,27 @@
  *
  */
 
-package tictactoe.component;
+package tictactoe.component.console;
 
-import tictactoe.model.game.GameTable;
+import tictactoe.component.DataPrinter;
+import tictactoe.component.GameOverHandler;
+
+import java.util.Scanner;
 
 /**
  * @author mark
  */
-public interface DataPrinter {
+public class ConsoleGameOverHandler implements GameOverHandler {
 
-    void printInfoMessage(final String message);
+    DataPrinter dataPrinter;
 
-    void printErrorMessage(final String message);
+    public ConsoleGameOverHandler(final DataPrinter dataPrinter) {
+        this.dataPrinter = dataPrinter;
+    }
 
-    void printGameTable(final GameTable gameTable);
-
-    void printInstructions();
+    @Override
+    public void gameOver() {
+        dataPrinter.printInfoMessage("GAME OVER");
+        new Scanner(System.in).nextLine();
+    }
 }

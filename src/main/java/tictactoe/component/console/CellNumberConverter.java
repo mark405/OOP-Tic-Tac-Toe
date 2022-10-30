@@ -15,14 +15,17 @@
  *
  */
 
-package tictactoe.model;
+package tictactoe.component.console;
+
+import tictactoe.model.game.Cell;
 
 /**
  * @author mark
  */
-public enum PlayerType {
+public interface CellNumberConverter {
 
-    USER,
+    Cell toCell(final char number);
 
-    COMPUTER
+    char toNumber(final Cell cell);
+
 }

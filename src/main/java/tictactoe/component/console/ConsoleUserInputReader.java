@@ -17,10 +17,9 @@
 
 package tictactoe.component.console;
 
-import tictactoe.component.CellNumberConverter;
 import tictactoe.component.DataPrinter;
 import tictactoe.component.UserInputReader;
-import tictactoe.model.Cell;
+import tictactoe.model.game.Cell;
 
 import java.util.Scanner;
 

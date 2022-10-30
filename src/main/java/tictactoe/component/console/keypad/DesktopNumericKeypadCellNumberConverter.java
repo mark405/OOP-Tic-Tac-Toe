@@ -15,26 +15,38 @@
  *
  */
 
-package tictactoe.component.keypad;
+package tictactoe.component.console.keypad;
 
-import tictactoe.component.CellNumberConverter;
-import tictactoe.model.Cell;
+import tictactoe.component.console.CellNumberConverter;
+import tictactoe.model.game.Cell;
 
 /**
  * @author mark
  */
-public class TerminalNumericKeypadCellNumberConverter implements CellNumberConverter {
+public class DesktopNumericKeypadCellNumberConverter implements CellNumberConverter {
+
+    char[][] tableOfNumbers = {
+            {'7', '8', '9'},
+            {'4', '5', '6'},
+            {'1', '2', '3'},
+    };
 
     @Override
     public Cell toCell(char number) {
-        final var val = number - '0' - 1;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (tableOfNumbers[i][j] == number) {
+                    return new Cell(i, j);
+                }
+            }
+        }
 
-        return new Cell(val / 3, val % 3);
+        return null;
     }
 
     @Override
     public char toNumber(Cell cell) {
-        return (char) ('0' + (cell.getRow() * 3 + cell.getCol() + 1));
+        return tableOfNumbers[cell.getRow()][cell.getCol()];
     }
-
 }
+

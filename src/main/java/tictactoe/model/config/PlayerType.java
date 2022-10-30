@@ -15,20 +15,14 @@
  *
  */
 
-package tictactoe.component;
-
-import tictactoe.model.game.GameTable;
+package tictactoe.model.config;
 
 /**
  * @author mark
  */
-public interface DataPrinter {
+public enum PlayerType {
 
-    void printInfoMessage(final String message);
+    USER,
 
-    void printErrorMessage(final String message);
-
-    void printGameTable(final GameTable gameTable);
-
-    void printInstructions();
+    COMPUTER
 }
