@@ -34,7 +34,7 @@ public class DesktopNumericKeypadCellNumberConverter implements CellNumberConver
     };
 
     @Override
-    public Cell toCell(char number) {
+    public Cell toCell(final char number) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (tableOfNumbers[i][j] == number) {
@@ -48,8 +48,14 @@ public class DesktopNumericKeypadCellNumberConverter implements CellNumberConver
     }
 
     @Override
-    public char toNumber(Cell cell) {
-        return tableOfNumbers[cell.getRow()][cell.getCol()];
+    public char toNumber(final Cell cell) {
+        try {
+            return tableOfNumbers[cell.getRow()][cell.getCol()];
+        } catch (final ArrayIndexOutOfBoundsException ignored) {
+            throw new IllegalArgumentException(
+                    format("Row and col indexes must be from 0 to 2", cell.getRow(), cell.getCol())
+            );
+        }
     }
 }
 
