@@ -21,17 +21,24 @@ import tictactoe.model.game.Cell;
 import tictactoe.model.game.GameTable;
 import tictactoe.model.game.Sign;
 
-import java.util.Arrays;
 import java.util.Random;
 
 /**
  * @author mark
  */
 public class ComputerMove implements Move {
+
+    private final ComputerMoveStrategy[] strategies;
+
+    public ComputerMove(final ComputerMoveStrategy[] strategies) {
+        this.strategies = strategies;
+    }
+
     @Override
     public void make(final GameTable gameTable, final Sign sign) {
 
-        Cell[] emptyCells = new Cell[9];
+        /*
+        final Cell[] emptyCells = new Cell[9];
 
         int count = getCountOfEmptyCells(gameTable, emptyCells);
 
@@ -42,21 +49,18 @@ public class ComputerMove implements Move {
         } else {
             throw new IllegalArgumentException("Game table does not contain empty cell");
         }
+        */
 
-
-    }
-
-    private int getCountOfEmptyCells(final GameTable gameTable, Cell[] emptyCells) {
-        var index = 0;
-
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                final Cell cell = new Cell(i, j);
-                if (gameTable.isEmpty(cell)) {
-                    emptyCells[index++] = cell;
-                }
+        for (final ComputerMoveStrategy strategy : strategies) {
+            if (strategy.tryToMakeMove(gameTable, sign)) {
+                return;
             }
         }
-        return index;
+
+        throw new IllegalArgumentException(
+                "Gametable does not contain empty cells or" +
+                " invalid cofiguration for computer strategies ");
+
     }
+
 }
