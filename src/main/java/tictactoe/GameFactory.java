@@ -23,6 +23,7 @@ import tictactoe.component.console.ConsoleDataPrinter;
 import tictactoe.component.console.ConsoleGameOverHandler;
 import tictactoe.component.console.ConsoleUserInputReader;
 import tictactoe.component.console.keypad.DesktopNumericKeypadCellNumberConverter;
+import tictactoe.component.strategies.CenterComputerMoveStrategy;
 import tictactoe.component.strategies.RandomComputerMoveStrategy;
 import tictactoe.component.swing.GameWindow;
 import tictactoe.component.config.CommandLineArgumentParser;
@@ -59,7 +60,8 @@ public class GameFactory {
     public Game create() {
 
         final ComputerMoveStrategy[] strategies = {
-                new RandomComputerMoveStrategy()
+                new CenterComputerMoveStrategy(),
+                new RandomComputerMoveStrategy(),
         };
 
         final DataPrinter dataPrinter;
