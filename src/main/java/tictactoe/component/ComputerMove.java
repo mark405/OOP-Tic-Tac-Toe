@@ -21,6 +21,7 @@ import tictactoe.model.game.Cell;
 import tictactoe.model.game.GameTable;
 import tictactoe.model.game.Sign;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -29,21 +30,33 @@ import java.util.Random;
 public class ComputerMove implements Move {
     @Override
     public void make(final GameTable gameTable, final Sign sign) {
-        while (true) {
 
-            final Random random = new Random();
+        Cell[] emptyCells = new Cell[9];
 
-            final var row = random.nextInt(3);
-            final var col = random.nextInt(3);
+        int count = getCountOfEmptyCells(gameTable, emptyCells);
 
-            final Cell randomCell = new Cell(row, col);
+        if (count > 0) {
+            final Cell randomCell = emptyCells[new Random().nextInt(count)];
 
-            if (gameTable.isEmpty(randomCell)) {
-                gameTable.setSign(randomCell, sign);
-                return;
-            }
-
+            gameTable.setSign(randomCell, sign);
+        } else {
+            throw new IllegalArgumentException("Game table does not contain empty cell");
         }
 
+
+    }
+
+    private int getCountOfEmptyCells(final GameTable gameTable, Cell[] emptyCells) {
+        var index = 0;
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                final Cell cell = new Cell(i, j);
+                if (gameTable.isEmpty(cell)) {
+                    emptyCells[index++] = cell;
+                }
+            }
+        }
+        return index;
     }
 }

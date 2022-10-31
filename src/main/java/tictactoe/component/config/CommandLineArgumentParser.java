@@ -46,7 +46,7 @@ public class CommandLineArgumentParser {
                 if (userInterface == null) {
                     userInterface = UserInterface.valueOf(arg);
                 } else {
-                    System.err.println("Unsupported command line argument: '" + arg + "'");
+                    System.err.println("User interface has already chosen: " + userInterface.name());
                 }
             } else {
                 if (USER.name().equalsIgnoreCase(arg) || COMPUTER.name().equalsIgnoreCase(arg)) {
@@ -55,10 +55,10 @@ public class CommandLineArgumentParser {
                     } else if (playerType2 == null) {
                         playerType2 = PlayerType.valueOf(arg.toUpperCase());
                     } else {
-                        System.err.println("Unsupported command line argument: '" + arg + "'");
+                        System.err.println("Game mode has already chosen: " + playerType1 + " " + playerType2);
                     }
                 } else {
-                    System.err.println("Unsupported command line argument: '" + arg + "'");
+                    System.err.println("Unknown argument: '" + arg + "'");
                 }
             }
         }
