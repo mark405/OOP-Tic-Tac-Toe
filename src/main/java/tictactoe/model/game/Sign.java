@@ -17,6 +17,8 @@
 
 package tictactoe.model.game;
 
+import static java.lang.String.format;
+
 /**
  * @author mark
  */
@@ -27,6 +29,16 @@ public enum Sign {
     O,
 
     EMPTY;
+
+    public Sign getOppositeSign() {
+        if (this == X) {
+            return O;
+        } else if (this == O) {
+            return X;
+        }
+
+        throw new IllegalStateException(format("Method is called in wrong time, sign is ", this.name()));
+    }
 
     @Override
     public String toString() {

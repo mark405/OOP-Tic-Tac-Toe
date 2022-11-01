@@ -8,10 +8,10 @@ import tictactoe.model.game.Sign;
 /**
  * @author mark
  */
-public class WinNowComputerMoveStrategy extends AbstractComputerMoveStrategy {
+public class PreventUserWinComputerMoveStrategy extends AbstractComputerMoveStrategy {
 
     @Override
     protected Sign getFoundSign(final Sign moveSign) {
-        return moveSign;
+        return moveSign.getOppositeSign();
     }
 }
