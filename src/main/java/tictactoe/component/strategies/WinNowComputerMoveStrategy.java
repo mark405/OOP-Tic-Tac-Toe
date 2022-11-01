@@ -1,14 +1,15 @@
 package tictactoe.component.strategies;
 
-import tictactoe.component.ComputerMoveStrategy;
-import tictactoe.model.game.Cell;
-import tictactoe.model.game.GameTable;
 import tictactoe.model.game.Sign;
 
 /**
  * @author mark
  */
 public class WinNowComputerMoveStrategy extends AbstractComputerMoveStrategy {
+
+    public WinNowComputerMoveStrategy() {
+        super(1);
+    }
 
     @Override
     protected Sign getFoundSign(final Sign moveSign) {
